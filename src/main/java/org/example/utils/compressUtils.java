@@ -43,7 +43,7 @@ public class compressUtils {
 
     //=================================================================
 
-    public static byte[] binaryCompress(byte[] input){
+    public static byte[] binaryCompress(byte[] input) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try (GZIPOutputStream gzipOutputStream = new GZIPOutputStream(outputStream)) {
             gzipOutputStream.write(input);

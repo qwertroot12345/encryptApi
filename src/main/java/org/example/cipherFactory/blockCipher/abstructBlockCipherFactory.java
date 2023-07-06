@@ -9,7 +9,6 @@ import org.example.utils.cipherFullmodenameBuilder;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.SecureRandom;
@@ -46,8 +45,8 @@ public abstract class abstructBlockCipherFactory extends abstructCipherFactory {
         KeyGenerator kg = KeyGenerator.getInstance(cipname);
         SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
         sr.setSeed(b_passwd);
-        kg.init(encbit,sr);
-        Key aes_skey=kg.generateKey();
+        kg.init(encbit, sr);
+        Key aes_skey = kg.generateKey();
         Cipher enc, dec;
         enc = Cipher.getInstance(cipstr);
         dec = Cipher.getInstance(cipstr);

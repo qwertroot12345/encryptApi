@@ -70,8 +70,8 @@ public class cipherFullmodenameBuilder {
                 case NONE -> cippad = "NoPadding";
                 case PCKS7 -> cippad = "PKCS7Padding";
                 case ZEROBYTE -> cippad = "ZeroBytePadding";
-                case OAEP_SHA1_MGF1 -> cippad="OAEPWithSHA-1AndMGF1Padding";
-                case OAEP_SHA256_MGF1 -> cippad="OAEPWithSHA-256AndMGF1Padding";
+                case OAEP_SHA1_MGF1 -> cippad = "OAEPWithSHA-1AndMGF1Padding";
+                case OAEP_SHA256_MGF1 -> cippad = "OAEPWithSHA-256AndMGF1Padding";
             }
             fullname.append(cipname)
                     .append("/")

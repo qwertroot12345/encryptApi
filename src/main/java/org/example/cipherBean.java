@@ -16,23 +16,23 @@ import java.security.PublicKey;
 @Data
 public class cipherBean {
     //加密算法
-    private  cipherName cipher;
+    private cipherName cipher;
     //加密位数
-    private  cipherSettingEnum.cipherBit bit;
+    private cipherSettingEnum.cipherBit bit;
     //加密模式
-    private  cipherSettingEnum.cipherWorkmode workmode;
+    private cipherSettingEnum.cipherWorkmode workmode;
     //填充模式
-    private  cipherSettingEnum.padType padType;
+    private cipherSettingEnum.padType padType;
     //密码（对称加密）和初始化向量
-    private  String password, iv;
+    private String password, iv;
     //公钥（非对称加密）
-    private  PublicKey pubkey;
+    private PublicKey pubkey;
     //私钥（非对称加密）
-    private  PrivateKey prikey;
+    private PrivateKey prikey;
     //内部加密器
-    private  Cipher innerCipher;
+    private Cipher innerCipher;
     //私钥是否加密(AES-256-ECB)
-    private  boolean prikeyEncrypted;
+    private boolean prikeyEncrypted;
     //加密内容是否压缩
     private boolean is_compress;
 

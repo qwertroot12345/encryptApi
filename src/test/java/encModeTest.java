@@ -1,5 +1,4 @@
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.example.cipherFactory.abstructCipherFactory;
 import org.example.encInterface.cipherFun;
 import org.example.utils.cipherFullmodenameBuilder;
 import org.junit.Before;

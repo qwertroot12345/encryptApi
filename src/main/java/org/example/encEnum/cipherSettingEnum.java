@@ -27,9 +27,9 @@ public enum cipherSettingEnum {
     public enum cipherBit {
         BITS_56,
         BITS_128, BITS_192, BITS_256,
-        BITS_448,BITS_512, BITS_768,
+        BITS_448, BITS_512, BITS_768,
         BITS_1024, BITS_2048, BITS_3072,
-        BITS_4096,BITS_8192
+        BITS_4096, BITS_8192
     }
 
 }
