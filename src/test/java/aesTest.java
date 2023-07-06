@@ -16,13 +16,12 @@ public class aesTest {
     @Test
     public void aesTest1() throws Exception {
         Security.addProvider(new BouncyCastleProvider());
-        cipherBean config = new cipherBean();
-        config.setPassword("0000000000000");
-        config.setIv("0000000000000000");
-        config.setCipher(cipherName.AES);
-        config.setBit(cipherSettingEnum.cipherBit.BITS_256);
-        config.setWorkmode(cipherSettingEnum.cipherWorkmode.CBC);
-        config.setPadType(cipherSettingEnum.padType.PCKS7);
+        cipherBean config = new cipherBean("0000","0000000000000000",
+                cipherName.AES,
+                cipherSettingEnum.cipherBit.BITS_256,
+                cipherSettingEnum.cipherWorkmode.CBC,
+                cipherSettingEnum.padType.PCKS5);
+
         AEScipherFactory factory = new AEScipherFactory(config);
         Cipher enc = factory.getEncCip();
         Cipher dec = factory.getDecCip();

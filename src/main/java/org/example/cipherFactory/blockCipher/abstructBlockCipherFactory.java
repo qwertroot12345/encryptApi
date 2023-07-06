@@ -69,7 +69,6 @@ public abstract class abstructBlockCipherFactory extends abstructCipherFactory {
             case DES -> cipname = "DES";
             case AES -> cipname = "AES";
             //...........
-            default -> cipname = "AES";
         }
     }
 
