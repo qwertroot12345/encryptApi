@@ -29,6 +29,11 @@ public class RSACipherFactory extends abstructAssCipherFactory {
     }
 
     @Override
+    protected boolean checkis_cipvalid(cipherSettingEnum.cipherWorkmode workmode, cipherSettingEnum.padType pad) {
+        return false;
+    }
+
+    @Override
     public assKeyPair<PublicKey, PrivateKey> generateKeyPair(cipherSettingEnum.cipherBit bit) {
         return null;
     }
