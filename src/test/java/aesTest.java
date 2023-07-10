@@ -2,7 +2,7 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Base64;
 import org.example.cipherBean;
 import org.example.cipherFactory.blockCipher.AEScipherFactory;
-import org.example.encEnum.cipherName;
+import org.example.encEnum.cipherNameEnum;
 import org.example.encEnum.cipherSettingEnum;
 import org.example.encEnum.encodeTypeEnum;
 import org.example.utils.codeCoverUtils;
@@ -16,8 +16,8 @@ public class aesTest {
     @Test
     public void aesTest1() throws Exception {
         Security.addProvider(new BouncyCastleProvider());
-        cipherBean config = new cipherBean("0000","0000000000000000",
-                cipherName.AES,
+        cipherBean config = new cipherBean("0000", "0000000000000000",
+                cipherNameEnum.AES,
                 cipherSettingEnum.cipherBit.BITS_256,
                 cipherSettingEnum.cipherWorkmode.CBC,
                 cipherSettingEnum.padType.PCKS5);

@@ -16,7 +16,7 @@ import java.security.SecureRandom;
 import java.security.Security;
 import java.util.ArrayList;
 
-import static org.example.encEnum.cipherName.AES;
+import static org.example.encEnum.cipherNameEnum.AES;
 import static org.example.encEnum.cipherSettingEnum.cipherWorkmode.*;
 import static org.example.encEnum.cipherSettingEnum.padType.*;
 

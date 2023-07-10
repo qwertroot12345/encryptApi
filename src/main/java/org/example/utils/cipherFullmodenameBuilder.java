@@ -1,7 +1,7 @@
 package org.example.utils;
 
 import org.example.cipherBean;
-import org.example.encEnum.cipherName;
+import org.example.encEnum.cipherNameEnum;
 import org.example.encEnum.cipherSettingEnum;
 
 public class cipherFullmodenameBuilder {
@@ -10,7 +10,7 @@ public class cipherFullmodenameBuilder {
 
     private StringBuilder fullname;
 
-    private cipherName e_cipname;
+    private cipherNameEnum e_cipname;
     private cipherSettingEnum.cipherWorkmode e_cipmode;
     private cipherSettingEnum.padType e_cippad;
 
@@ -20,18 +20,10 @@ public class cipherFullmodenameBuilder {
         e_cippad = config.getPadType();
     }
 
-    public cipherFullmodenameBuilder(cipherName e_cipname,
-                                     cipherSettingEnum.cipherWorkmode e_cipmode,
-                                     cipherSettingEnum.padType e_cippad) {
-        this.e_cipname = e_cipname;
-        this.e_cipmode = e_cipmode;
-        this.e_cippad = e_cippad;
-    }
-
     public cipherFullmodenameBuilder() {
     }
 
-    public cipherFullmodenameBuilder setE_cipname(cipherName e_cipname) {
+    public cipherFullmodenameBuilder setE_cipname(cipherNameEnum e_cipname) {
         this.e_cipname = e_cipname;
         return this;
     }
@@ -48,31 +40,20 @@ public class cipherFullmodenameBuilder {
 
     public String getcCipherStr() throws Exception {
         if (e_cipname == null || e_cippad == null || e_cipmode == null) {
-            throw new Exception("can't be null config.");
+            if (e_cipname == null) {
+                System.out.println("加密器名称为空");
+            }
+            if (e_cippad == null) {
+                System.out.println("加密器填充为空");
+            }
+            if (e_cipmode == null) {
+                System.out.println("加密器工作模式为空");
+            }
         } else {
             fullname = new StringBuilder();
-            switch (e_cipname) {
-                case AES -> cipname = "AES";
-                case DES -> cipname = "DES";
-            }
-            switch (e_cipmode) {
-                case CBC -> cipmode = "CBC";
-                case CFB -> cipmode = "CFB";
-                case CTR -> cipmode = "CTR";
-                case ECB -> cipmode = "ECB";
-                case GCM -> cipmode = "GCM";
-                case OFB -> cipmode = "OFB";
-                case SIC -> cipmode = "SIC";
-            }
-            switch (e_cippad) {
-                case PCKS5 -> cippad = "PKCS5Padding";
-                case TBC -> cippad = "TBCPadding";
-                case NONE -> cippad = "NoPadding";
-                case PCKS7 -> cippad = "PKCS7Padding";
-                case ZEROBYTE -> cippad = "ZeroBytePadding";
-                case OAEP_SHA1_MGF1 -> cippad = "OAEPWithSHA-1AndMGF1Padding";
-                case OAEP_SHA256_MGF1 -> cippad = "OAEPWithSHA-256AndMGF1Padding";
-            }
+            cipname = cipherNameEnum.toSt(e_cipname);
+            cipmode = cipherSettingEnum.cipherWorkmode.toSt(e_cipmode);
+            cippad = cipherSettingEnum.padType.toSt(e_cippad);
             fullname.append(cipname)
                     .append("/")
                     .append(cipmode)

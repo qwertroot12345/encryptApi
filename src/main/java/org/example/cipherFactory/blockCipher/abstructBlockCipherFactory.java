@@ -16,7 +16,6 @@ import java.security.SecureRandom;
 public abstract class abstructBlockCipherFactory extends abstructCipherFactory {
     protected String passwd, iv;
     protected byte[] b_passwd, b_iv;
-    protected int encbit;
     protected boolean needIV;
 
 
@@ -27,16 +26,19 @@ public abstract class abstructBlockCipherFactory extends abstructCipherFactory {
     public void init(cipherBean config) throws Exception {
         super.init(config);
         getCipName();
-        is_needIV();
-        if (needIV && StringUtils.isEmpty(config.getIv())) {
-            throw new Exception("no valid IV");
+        getEncBit();
+        if (config.getWorkmode() != cipherSettingEnum.cipherWorkmode.ECB) {
+            if (!StringUtils.isEmpty(config.getIv())) {
+                b_iv = iv.getBytes(StandardCharsets.UTF_8);
+            } else {
+                throw new Exception("no valid IV");
+            }
         }
-        passwd = config.getPassword();
         if (StringUtils.isEmpty(config.getPassword())) {
             throw new Exception("no valid password");
         }
+        passwd = config.getPassword();
         b_passwd = passwd.getBytes(StandardCharsets.UTF_8);
-        getEncBit();
         cipstr = new cipherFullmodenameBuilder(config).getcCipherStr();
     }
 
@@ -46,46 +48,19 @@ public abstract class abstructBlockCipherFactory extends abstructCipherFactory {
         SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
         sr.setSeed(b_passwd);
         kg.init(encbit, sr);
-        Key aes_skey = kg.generateKey();
-        Cipher enc, dec;
-        enc = Cipher.getInstance(cipstr);
-        dec = Cipher.getInstance(cipstr);
-
+        Key skey = kg.generateKey();
+        inner_enc = Cipher.getInstance(cipstr);
+        inner_dec = Cipher.getInstance(cipstr);
         if (needIV) {
             b_iv = iv.getBytes(StandardCharsets.UTF_8);
             IvParameterSpec ivs = new IvParameterSpec(b_iv);
-            enc.init(Cipher.ENCRYPT_MODE, aes_skey, ivs);
-            dec.init(Cipher.DECRYPT_MODE, aes_skey, ivs);
+            inner_enc.init(Cipher.ENCRYPT_MODE, skey, ivs);
+            inner_dec.init(Cipher.DECRYPT_MODE, skey, ivs);
         } else {
-            enc.init(Cipher.ENCRYPT_MODE, aes_skey);
-            dec.init(Cipher.DECRYPT_MODE, aes_skey);
+            inner_enc.init(Cipher.ENCRYPT_MODE, skey);
+            inner_dec.init(Cipher.DECRYPT_MODE, skey);
         }
-        return new Cipher[]{enc, dec};
-    }
-
-    @Override
-    protected void getCipName() {
-        switch (config.getCipher()) {
-            case DES -> cipname = "DES";
-            case AES -> cipname = "AES";
-            //...........
-        }
-    }
-
-    private void is_needIV() {
-        needIV = config.getWorkmode() == cipherSettingEnum.cipherWorkmode.CBC;
-    }
-
-    @Override
-    protected void getEncBit() {
-        switch (config.getBit()) {
-            case BITS_56 -> encbit = 56;
-            case BITS_128 -> encbit = 128;
-            case BITS_192 -> encbit = 192;
-            case BITS_256 -> encbit = 256;
-            case BITS_448 -> encbit = 448;
-            case BITS_512 -> encbit = 512;
-        }
+        return new Cipher[]{inner_enc, inner_dec};
     }
 
 }
