@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import org.apache.commons.io.FileUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.example.encEnum.cipherNameEnum;
 import org.example.encEnum.cipherSettingEnum;
 
 import java.io.File;
@@ -25,7 +24,7 @@ public class cipherBean {
     //加密类型（块/流/公钥）
     cipherSettingEnum.cipherType type;
     //加密算法
-    private cipherNameEnum cipher;
+    private cipherSettingEnum.cipherNameEnum cipher;
     //加密位数
     private cipherSettingEnum.cipherBit bit;
     //加密模式
@@ -45,7 +44,7 @@ public class cipherBean {
 
     //对称加密（不带iv）
     public cipherBean(String passwd,
-                      cipherNameEnum cipher,
+                      cipherSettingEnum.cipherNameEnum cipher,
                       cipherSettingEnum.cipherBit bit,
                       cipherSettingEnum.padType padType) {
         setPassword(passwd);
@@ -58,7 +57,7 @@ public class cipherBean {
     //对称加密（带iv）
     public cipherBean(String passwd,
                       String iv,
-                      cipherNameEnum cipher,
+                      cipherSettingEnum.cipherNameEnum cipher,
                       cipherSettingEnum.cipherBit bit,
                       cipherSettingEnum.cipherWorkmode workmode,
                       cipherSettingEnum.padType padType) {
@@ -74,7 +73,7 @@ public class cipherBean {
     //公钥加密（带密钥对，极少）
     public cipherBean(PublicKey pubkey,
                       PrivateKey prikey,
-                      cipherNameEnum cipher,
+                      cipherSettingEnum.cipherNameEnum cipher,
                       cipherSettingEnum.cipherWorkmode workmode,
                       cipherSettingEnum.padType padType) {
         setType(cipherSettingEnum.cipherType.ASSM_ENCRYPT);
@@ -86,7 +85,7 @@ public class cipherBean {
     }
 
     //公钥加密（生成密钥）
-    public cipherBean(cipherNameEnum cipher,
+    public cipherBean(cipherSettingEnum.cipherNameEnum cipher,
                       cipherSettingEnum.cipherBit bit,
                       cipherSettingEnum.cipherWorkmode workmode,
                       cipherSettingEnum.padType padType) throws Exception {
@@ -114,7 +113,7 @@ public class cipherBean {
     public void output_pk(KeyPair kp) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, String> map = new HashMap<>();
-        map.put("cipher", cipherNameEnum.toSt(cipher));
+        map.put("cipher", cipherSettingEnum.cipherNameEnum.toSt(cipher));
         map.put("pubkey", kp.getPublic().toString());
         map.put("prikey", kp.getPrivate().toString());
         String jsonStr = objectMapper.writeValueAsString(map);
@@ -126,9 +125,9 @@ public class cipherBean {
                 jsonStr.getBytes(StandardCharsets.UTF_8));
     }
 
-    public KeyPair generateKeyPair(cipherNameEnum name, cipherSettingEnum.cipherBit bit)
+    public KeyPair generateKeyPair(cipherSettingEnum.cipherNameEnum name, cipherSettingEnum.cipherBit bit)
             throws Exception {
-        KeyPairGenerator kpg = KeyPairGenerator.getInstance(cipherNameEnum.toSt(name));
+        KeyPairGenerator kpg = KeyPairGenerator.getInstance(cipherSettingEnum.cipherNameEnum.toSt(name));
         kpg.initialize(cipherSettingEnum.cipherBit.toInt(bit));
         kp = kpg.generateKeyPair();
         return kp;

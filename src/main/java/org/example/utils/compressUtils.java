@@ -1,9 +1,11 @@
 package org.example.utils;
 
 import org.bouncycastle.util.encoders.Base64;
+import org.example.encEnum.compressEnum;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
@@ -77,4 +79,6 @@ public class compressUtils {
     public static String binaryDeompressBase64(byte[] input) {
         return Base64.toBase64String(binaryDecompress(input));
     }
+
+
 }

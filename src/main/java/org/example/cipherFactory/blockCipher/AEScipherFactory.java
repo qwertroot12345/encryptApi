@@ -3,7 +3,7 @@ package org.example.cipherFactory.blockCipher;
 import org.example.cipherBean;
 import org.example.encEnum.cipherSettingEnum;
 
-public class AEScipherFactory extends abstructBlockCipherFactory {
+public class AEScipherFactory extends absBlockCipherFactory {
     public AEScipherFactory(cipherBean config) throws Exception {
         super(config);
     }

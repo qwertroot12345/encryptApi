@@ -2,7 +2,7 @@ package org.example.cipherFactory.blockCipher;
 
 import org.apache.commons.lang3.StringUtils;
 import org.example.cipherBean;
-import org.example.cipherFactory.abstructCipherFactory;
+import org.example.cipherFactory.absCipherFactory;
 import org.example.encEnum.cipherSettingEnum;
 import org.example.utils.cipherFullmodenameBuilder;
 
@@ -13,13 +13,13 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.SecureRandom;
 
-public abstract class abstructBlockCipherFactory extends abstructCipherFactory {
+public abstract class absBlockCipherFactory extends absCipherFactory {
     protected String passwd, iv;
     protected byte[] b_passwd, b_iv;
     protected boolean needIV;
 
 
-    public abstructBlockCipherFactory(cipherBean config) throws Exception {
+    public absBlockCipherFactory(cipherBean config) throws Exception {
         super(config);
     }
 

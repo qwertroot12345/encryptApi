@@ -8,7 +8,7 @@ import javax.crypto.Cipher;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
-public class RSACipherFactory extends abstructAssCipherFactory {
+public class RSACipherFactory extends absAssCipherFactory {
     public RSACipherFactory(cipherBean config) throws Exception {
         super(config);
     }
@@ -16,16 +16,6 @@ public class RSACipherFactory extends abstructAssCipherFactory {
     @Override
     public Cipher[] getCipPair() {
         return new Cipher[]{};
-    }
-
-    @Override
-    protected void getCipName() {
-
-    }
-
-    @Override
-    protected void getEncBit() {
-
     }
 
     @Override

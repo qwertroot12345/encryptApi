@@ -2,13 +2,12 @@ package org.example.cipherFactory;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.example.cipherBean;
-import org.example.encEnum.cipherNameEnum;
 import org.example.encEnum.cipherSettingEnum;
 
 import javax.crypto.Cipher;
 import java.security.Security;
 
-public abstract class abstructCipherFactory {
+public abstract class absCipherFactory {
 
     static {
         Security.addProvider(new BouncyCastleProvider());
@@ -22,7 +21,7 @@ public abstract class abstructCipherFactory {
 
     protected Cipher inner_enc, inner_dec;
 
-    public abstructCipherFactory(cipherBean config) throws Exception {
+    public absCipherFactory(cipherBean config) throws Exception {
         init(config);
     }
 
@@ -43,7 +42,7 @@ public abstract class abstructCipherFactory {
     }
 
     protected void getCipName() {//生成kg
-        cipname = cipherNameEnum.toSt(config.getCipher());
+        cipname = cipherSettingEnum.cipherNameEnum.toSt(config.getCipher());
     }
 
     protected void getEncBit() {//生成skey和kp

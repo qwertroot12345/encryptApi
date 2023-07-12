@@ -1,7 +1,6 @@
 package org.example.utils;
 
 import org.example.cipherBean;
-import org.example.encEnum.cipherNameEnum;
 import org.example.encEnum.cipherSettingEnum;
 
 public class cipherFullmodenameBuilder {
@@ -10,7 +9,7 @@ public class cipherFullmodenameBuilder {
 
     private StringBuilder fullname;
 
-    private cipherNameEnum e_cipname;
+    private cipherSettingEnum.cipherNameEnum e_cipname;
     private cipherSettingEnum.cipherWorkmode e_cipmode;
     private cipherSettingEnum.padType e_cippad;
 
@@ -23,7 +22,7 @@ public class cipherFullmodenameBuilder {
     public cipherFullmodenameBuilder() {
     }
 
-    public cipherFullmodenameBuilder setE_cipname(cipherNameEnum e_cipname) {
+    public cipherFullmodenameBuilder setE_cipname(cipherSettingEnum.cipherNameEnum e_cipname) {
         this.e_cipname = e_cipname;
         return this;
     }
@@ -51,7 +50,7 @@ public class cipherFullmodenameBuilder {
             }
         } else {
             fullname = new StringBuilder();
-            cipname = cipherNameEnum.toSt(e_cipname);
+            cipname = cipherSettingEnum.cipherNameEnum.toSt(e_cipname);
             cipmode = cipherSettingEnum.cipherWorkmode.toSt(e_cipmode);
             cippad = cipherSettingEnum.padType.toSt(e_cippad);
             fullname.append(cipname)
